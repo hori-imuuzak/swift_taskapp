@@ -1,24 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pgq-K5-7Qf">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--ViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="ViewController" customClass="ViewController" customModule="taskapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nga-5O-4kB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="7bf-0S-x8e" detailTextLabel="smi-n9-XRa" style="IBUITableViewCellStyleSubtitle" id="fAc-JY-3ru">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fAc-JY-3ru" id="CDS-AQ-pwX">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7bf-0S-x8e">
+                                                    <rect key="frame" x="20" y="10" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="smi-n9-XRa">
+                                                    <rect key="frame" x="20" y="31.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nga-5O-4kB" secondAttribute="trailing" id="792-zO-tj0"/>
+                            <constraint firstItem="nga-5O-4kB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="U2a-21-CRm"/>
+                            <constraint firstItem="nga-5O-4kB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UfU-fO-dzM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nga-5O-4kB" secondAttribute="bottom" id="qIe-eg-RLr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="タスク一覧" id="4BI-X4-Tm7">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7aw-Vu-m6C">
+                            <connections>
+                                <segue destination="MLV-IX-E9A" kind="show" id="mUh-AB-Wc6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="taskListTableView" destination="nga-5O-4kB" id="x4H-7T-ped"/>
+                        <segue destination="MLV-IX-E9A" kind="show" id="hQk-OA-iRq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="126.5625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oAQ-Av-FXc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pgq-K5-7Qf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PBz-bR-5LT">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="w8S-zh-56A"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LGm-AO-cKL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
+        </scene>
+        <!--TaskInputViewController-->
+        <scene sceneID="1eR-E3-QB4">
+            <objects>
+                <viewController id="MLV-IX-E9A" userLabel="TaskInputViewController" customClass="TaskInputViewController" customModule="taskapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c8o-yS-6IE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7r-sJ-0MI">
+                                <rect key="frame" x="20" y="148" width="374" height="714"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obh-SQ-5gf">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タスクのタイトルを入力してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IU8-VC-itk">
+                                        <rect key="frame" x="0.0" y="31" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8B-Pq-FQp">
+                                        <rect key="frame" x="0.0" y="85" width="35" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Luu-H4-zR8" userLabel="Content Text View">
+                                        <rect key="frame" x="0.0" y="116" width="374" height="150"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="l8d-zz-HGU"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="開始予定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIf-gr-CEs">
+                                        <rect key="frame" x="0.0" y="286" width="69.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="QZ6-KA-Ryc">
+                                        <rect key="frame" x="0.0" y="317" width="320" height="216"/>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="IU8-VC-itk" firstAttribute="top" secondItem="obh-SQ-5gf" secondAttribute="bottom" constant="10" id="0eb-z1-O1p"/>
+                                    <constraint firstItem="Luu-H4-zR8" firstAttribute="leading" secondItem="obh-SQ-5gf" secondAttribute="leading" id="1MY-WJ-cDf"/>
+                                    <constraint firstItem="qIf-gr-CEs" firstAttribute="top" secondItem="Luu-H4-zR8" secondAttribute="bottom" constant="20" id="3mC-ef-6nb"/>
+                                    <constraint firstItem="QZ6-KA-Ryc" firstAttribute="top" secondItem="qIf-gr-CEs" secondAttribute="bottom" constant="10" id="7Ss-D3-tSk"/>
+                                    <constraint firstItem="M8B-Pq-FQp" firstAttribute="leading" secondItem="obh-SQ-5gf" secondAttribute="leading" id="A0C-Yd-kod"/>
+                                    <constraint firstItem="QZ6-KA-Ryc" firstAttribute="leading" secondItem="obh-SQ-5gf" secondAttribute="leading" id="Em0-t7-ZmE"/>
+                                    <constraint firstItem="Luu-H4-zR8" firstAttribute="top" secondItem="M8B-Pq-FQp" secondAttribute="bottom" constant="10" id="Hwu-x0-aOJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="IU8-VC-itk" secondAttribute="trailing" id="N3R-zj-WsX"/>
+                                    <constraint firstItem="obh-SQ-5gf" firstAttribute="top" secondItem="V7r-sJ-0MI" secondAttribute="top" id="R9A-eq-fvC"/>
+                                    <constraint firstItem="IU8-VC-itk" firstAttribute="leading" secondItem="V7r-sJ-0MI" secondAttribute="leading" id="XAn-tk-0OM"/>
+                                    <constraint firstItem="Luu-H4-zR8" firstAttribute="leading" secondItem="V7r-sJ-0MI" secondAttribute="leading" id="aLM-tT-MQN"/>
+                                    <constraint firstItem="M8B-Pq-FQp" firstAttribute="top" secondItem="IU8-VC-itk" secondAttribute="bottom" constant="20" id="j82-3U-cLr"/>
+                                    <constraint firstItem="qIf-gr-CEs" firstAttribute="leading" secondItem="obh-SQ-5gf" secondAttribute="leading" id="rz0-Gd-ib9"/>
+                                    <constraint firstItem="IU8-VC-itk" firstAttribute="leading" secondItem="obh-SQ-5gf" secondAttribute="leading" id="x3T-OI-3Ym"/>
+                                    <constraint firstAttribute="trailing" secondItem="Luu-H4-zR8" secondAttribute="trailing" id="ymF-h7-CUg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="V7r-sJ-0MI" firstAttribute="top" secondItem="Nod-BX-hmb" secondAttribute="top" constant="60" id="Aau-Jk-SFy"/>
+                            <constraint firstItem="Nod-BX-hmb" firstAttribute="trailing" secondItem="V7r-sJ-0MI" secondAttribute="trailing" constant="20" id="Lxl-Bu-7If"/>
+                            <constraint firstItem="Nod-BX-hmb" firstAttribute="bottom" secondItem="V7r-sJ-0MI" secondAttribute="bottom" id="o3l-sz-sZV"/>
+                            <constraint firstItem="V7r-sJ-0MI" firstAttribute="leading" secondItem="Nod-BX-hmb" secondAttribute="leading" constant="20" id="oFC-b2-qNa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Nod-BX-hmb"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="タスク作成" id="Pcv-ka-Fpc"/>
+                    <connections>
+                        <outlet property="contentTextView" destination="Luu-H4-zR8" id="HZp-I8-upj"/>
+                        <outlet property="startAtDatePicker" destination="QZ6-KA-Ryc" id="HIj-rO-xEs"/>
+                        <outlet property="titleTextField" destination="IU8-VC-itk" id="bAB-d8-ClC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0mQ-C5-0g5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1976.8115942028987" y="126.5625"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="hQk-OA-iRq"/>
+    </inferredMetricsTieBreakers>
 </document>
