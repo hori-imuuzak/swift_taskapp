@@ -11,21 +11,24 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var taskListTableView: UITableView!
+    @IBOutlet weak var filterCategoryTextField: UITextField!
     var taskService: TaskService!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        setupTaskListTableView()
+        setupUI()
         
         self.taskService = TaskService(taskRepository: TaskRepositoryImpl())
         self.taskService.fetchAllTaskList()
     }
 
-    func setupTaskListTableView() {
+    func setupUI() {
         self.taskListTableView?.delegate = self
         self.taskListTableView?.dataSource = self
+        
+        self.filterCategoryTextField.addTarget(self, action: #selector(ViewController.filterCategoryDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +45,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 vc?.taskId = self.taskService.getAt(index: selectedRow).id
             }
         }
+    }
+    
+    @objc func filterCategoryDidChange(_ textField: UITextField) {
+        if (filterCategoryTextField.text ?? "").isEmpty {
+            self.taskService.fetchAllTaskList()
+        } else {
+            self.taskService.fetchFilteredByCategoryTaskList(category: filterCategoryTextField.text ?? "")
+        }
+        self.taskListTableView.reloadData()
     }
 
     // セル数を返す

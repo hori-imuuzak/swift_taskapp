@@ -16,6 +16,7 @@ enum EditMode {
 class TaskInputViewController: UIViewController {
     
     @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var startAtDatePicker: UIDatePicker!
     
@@ -37,6 +38,7 @@ class TaskInputViewController: UIViewController {
         if editMode == .create {
             self.taskService.createTask(
                 title: titleTextField.text ?? "",
+                category: categoryTextField.text ?? "",
                 content: contentTextView.text ?? "",
                 date: startAtDatePicker.date
             )
@@ -44,6 +46,7 @@ class TaskInputViewController: UIViewController {
             self.taskService.updateTask(
                 id: self.taskId!,
                 title: titleTextField.text ?? "",
+                category: categoryTextField.text ?? "",
                 content: contentTextView.text ?? "",
                 date: startAtDatePicker.date
             )
@@ -64,6 +67,7 @@ class TaskInputViewController: UIViewController {
             self.editMode = EditMode.update
             if let task = self.taskService.fetchTaskById(id: self.taskId!) {
                 titleTextField.text = task.title
+                categoryTextField.text = task.category
                 contentTextView.text = task.content
                 startAtDatePicker.date = task.date
             }

@@ -23,6 +23,10 @@ class TaskRepositoryImpl: TaskRepository {
         return Array(self.realm.objects(Task.self).sorted(byKeyPath: "date", ascending: true))
     }
     
+    func findByCategory(category: String) -> Array<Task> {
+        return Array(self.realm.objects(Task.self).filter("category = %@", category).sorted(byKeyPath: "date", ascending: true))
+    }
+    
     func create(task: Task) -> Bool {
         do {
             try self.realm.write {

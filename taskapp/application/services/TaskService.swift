@@ -26,13 +26,19 @@ class TaskService {
         return taskList
     }
     
-    func createTask(title: String, content: String, date: Date) -> Bool {
+    func fetchFilteredByCategoryTaskList(category: String) -> Array<Task> {
+        taskList = self.taskRepository.findByCategory(category: category)
+        return taskList
+    }
+    
+    func createTask(title: String, category: String, content: String, date: Date) -> Bool {
         if title.isEmpty {
             return false
         }
 
         let task = Task()
         task.title = title
+        task.category = category
         task.content = content
         task.date = date
 
@@ -49,7 +55,7 @@ class TaskService {
         return result
     }
     
-    func updateTask(id: Int, title: String, content: String, date: Date) -> Bool {
+    func updateTask(id: Int, title: String, category: String, content: String, date: Date) -> Bool {
         if title.isEmpty {
             return false
         }
@@ -57,6 +63,7 @@ class TaskService {
         let task = Task()
         task.id = id
         task.title = title
+        task.category = category
         task.content = content
         task.date = date
 
