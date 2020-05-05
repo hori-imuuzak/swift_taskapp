@@ -27,6 +27,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.taskListTableView?.delegate = self
         self.taskListTableView?.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.taskService.fetchAllTaskList()
+        self.taskListTableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "taskSelectedSegue" {
+            let vc = segue.destination as? TaskInputViewController
+            if let selectedRow = self.taskListTableView.indexPathForSelectedRow?.row {
+                vc?.taskId = self.taskService.getAt(index: selectedRow).id
+            }
+        }
+    }
 
     // セル数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

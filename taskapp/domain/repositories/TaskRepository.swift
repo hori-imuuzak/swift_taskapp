@@ -7,6 +7,9 @@
 //
 
 protocol TaskRepository {
+    func find(id: Int) -> Task?
     func findAll() -> Array<Task>
+    func create(task: Task) -> Bool
+    func update(id: Int, task: Task) -> Bool
     func delete(task: Task) -> Bool
 }
