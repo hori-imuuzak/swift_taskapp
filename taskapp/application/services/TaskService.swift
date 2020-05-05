@@ -11,7 +11,6 @@ import UserNotifications
 
 class TaskService {
     private let taskRepository: TaskRepository
-    private var taskList: Array<Task> = []
     
     init(taskRepository: TaskRepository) {
         self.taskRepository = taskRepository
@@ -22,13 +21,11 @@ class TaskService {
     }
     
     func fetchAllTaskList() -> Array<Task> {
-        taskList = self.taskRepository.findAll()
-        return taskList
+        return self.taskRepository.findAll()
     }
     
     func fetchFilteredByCategoryTaskList(category: String) -> Array<Task> {
-        taskList = self.taskRepository.findByCategory(category: category)
-        return taskList
+        return self.taskRepository.findByCategory(category: category)
     }
     
     func createTask(title: String, category: String, content: String, date: Date) -> Bool {
@@ -41,8 +38,9 @@ class TaskService {
         task.category = category
         task.content = content
         task.date = date
-
-        let taskId = ((self.taskList.max(by: { (a, b) -> Bool in return a.id < b.id }))?.id ?? 0) + 1
+        
+        let taskList = self.fetchAllTaskList()
+        let taskId = ((taskList.max(by: { (a, b) -> Bool in return a.id < b.id }))?.id ?? 0) + 1
         task.id = taskId
 
         let result = self.taskRepository.create(task: task)
@@ -68,22 +66,15 @@ class TaskService {
         task.date = date
 
         let result = self.taskRepository.update(id: task.id, task: task)
-        if result {
-            self.fetchAllTaskList()
-        }
         
         setTaskNotification(task)
         
         return result
     }
     
-    func deleteTaskAt(index: Int) -> Bool {
-        let task = self.taskList[index]
+    func deleteTask(task: Task) -> Bool {
         let taskId = task.id
         let result = self.taskRepository.delete(task: task)
-        if result {
-            self.fetchAllTaskList()
-        }
         
         // 通知の削除
         let center = UNUserNotificationCenter.current()
@@ -91,14 +82,6 @@ class TaskService {
         printPendingNotifications(center)
         
         return result
-    }
-    
-    func getAt(index: Int) -> Task {
-        return self.taskList[index]
-    }
-    
-    func getTaskCount() -> Int {
-        return taskList.count
     }
     
     func setTaskNotification(_ task: Task) {

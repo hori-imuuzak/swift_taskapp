@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var taskListTableView: UITableView!
     @IBOutlet weak var filterCategoryTextField: UITextField!
     var taskService: TaskService!
+    var taskList: Array<Task> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         setupUI()
         
         self.taskService = TaskService(taskRepository: TaskRepositoryImpl())
-        self.taskService.fetchAllTaskList()
+        self.taskList = self.taskService.fetchAllTaskList()
     }
 
     func setupUI() {
@@ -34,7 +35,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.taskService.fetchAllTaskList()
+        self.taskList = self.taskService.fetchAllTaskList()
         self.taskListTableView.reloadData()
     }
     
@@ -42,30 +43,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "taskSelectedSegue" {
             let vc = segue.destination as? TaskInputViewController
             if let selectedRow = self.taskListTableView.indexPathForSelectedRow?.row {
-                vc?.taskId = self.taskService.getAt(index: selectedRow).id
+                vc?.taskId = self.taskList[selectedRow].id
             }
         }
     }
     
     @objc func filterCategoryDidChange(_ textField: UITextField) {
         if (filterCategoryTextField.text ?? "").isEmpty {
-            self.taskService.fetchAllTaskList()
+            self.taskList = self.taskService.fetchAllTaskList()
         } else {
-            self.taskService.fetchFilteredByCategoryTaskList(category: filterCategoryTextField.text ?? "")
+            self.taskList = self.taskService.fetchFilteredByCategoryTaskList(category: filterCategoryTextField.text ?? "")
         }
         self.taskListTableView.reloadData()
     }
 
     // セル数を返す
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.taskService.getTaskCount()
+        return self.taskList.count
     }
     
     // 各セルの内容を返す
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let task = self.taskService.getAt(index: indexPath.row)
+        let task = self.taskList[indexPath.row]
         cell.textLabel?.text = task.title
         
         let formatter = DateFormatter()
@@ -90,7 +91,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 削除ボタンが押された時
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if self.taskService.deleteTaskAt(index: indexPath.row) {
+            if self.taskService.deleteTask(task: self.taskList[indexPath.row]) {
                 self.taskListTableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
